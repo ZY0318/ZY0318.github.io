@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Personal Page</title>
+    <style>
+        .avatar {
+            /*这是修饰头像的*/
+            float: left;
+            margin-right: 20px;
+            border-radius: 50%;
+            width: 100px;
+        }
+
+        .all {
+            /*这是*/
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .guide {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nap li {
+            display: inline;
+            list-style: none;
+            height: 60px;
+            line-height: 60px;
+            padding: 0 40px;
+        }
+
+        .nap a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .title {
+            font-weight: bold;
+        }
+
+        .nap {
+            background-color: rgb(249, 249, 249);
+            height: 60px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .nap li:hover {
+            border-bottom: 1px solid#DE3712;
+        }
+
+        .nap a:hover {
+            color: #DE3712;
+        }
+
+        .all {
+            margin-top: 50px;
+        }
+
+        .words2 {
+            width: 60%;
+            margin: 50px auto;
+        }
+
+        .intro {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .name {
+            margin-bottom: 25px;
+        }
+
+        .words1 {
+            color: #2a7e25;
+        }
+
+        .words2 {
+            font-size: 18px;
+            text-align: center;
+            color: rgb(0, 106, 37);
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+        .words3 {
+            font-size: 25px;
+            font-style: italic;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: rgb(203, 61, 0);
+            padding: 18px 30px 30px 70px;
+            border-left: 8px solid #fda313;
+            line-height: 1.6;
+            position: relative;
+            right: -100px;
+            background-color: antiquewhite;
+            width: 60%;
+            text-align: center;
+           
+        }
+
+        .words3::before {
+            font-family: Arial, Helvetica, sans-serif;
+            content: "\201C";
+            color: #DE3712;
+            position: absolute;
+            left: 25px;
+            font-size: 80px;
+            top: -10px;
+        }
+
+        .words3 span {
+            display: block;
+            color: #b94400;
+            font-style: normal;
+            font-weight: bold;
+            margin-top: 16px;
+            text-align: right;
+        }
+
+        @media(max-width:768px) {
+            .guide ul:last-child {
+                display: none
+            }
+        }
+
+        @media (max-width:768px) {
+            .guide ul:first-child {
+                flex-grow: 1;
+                text-align: center;
+            }
+
+        }
+
+        .bp {
+            width: 68%;
+            margin: 120px auto;
+        }
+
+        .lyy3 {
+            position: relative;
+             
+        }
+
+        .lyy2{position: relative;left: 20%;}
+        .lyy4{position: relative;right: 20%;}
+        .cm1{position: relative;left: 15%;}
+        .h2{text-align: center;color: #ff8000;}
+        .h3{text-align: center;color: #ff9d00;}
+    </style>
+</head>
+
+<body>
+    <header class="nap">
+        <div class="guide">
+            <ul circle>
+                <li><a href="homework.html" class="title">个人网站</a></li>
+            </ul>
+            <ul>
+                <li><a href="self-instruction.html">个人简介</a></li>
+                <li><a href="workingexperience.html">工作经验</a></li>
+                <li><a href="dayily.html">个人风采</a></li>
+            </ul>
+
+        </div>
+    </header>
+    <div class="all">
+        <div class="intro">
+            <img class="avatar" src="./lyy.jpg" alt="是我的头像">
+            <h1 class="name">懒羊羊</h1>
+            <p class="words1">聪明的羊总是会有意想不到的收获的。</p>
+        </div>
+        <div class="bp">
+            <div>
+                <p class="words2">
+                    What I bevelive
+                </p>
+            </div>
+            <div>
+                <p class="words3">
+                    To believe is to exist is to be reasonable. <br><span>———Hegel</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="h2"><h2>懒羊羊常常化险为夷哦！！！</h2></div>
+    <div class="h3"><h3>爱笑的小羊运气不会太差!!!</h3></div>
+    <table>
+        <tr>
+            <td><img class="lyy2" src="./lyy2.jpg" alt="" width="60%" style="float: left;"></td>
+            <td><img class="cm1" src="cm2.jpg" alt=""width="60%"></td>
+            <td>
+                <div class="lyy3"><img class="lyy3" src="lyy3.jpg" alt="" width="80%"></div>
+            </td>
+            <td><img class="cm2" src="cm2.jpg" alt=""width="60%"></td>
+            <td><img class="lyy4" src="lyy4.jpg" alt="" width="60%" style="float: right;"></td>
+        </tr>
+    </table>
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>
