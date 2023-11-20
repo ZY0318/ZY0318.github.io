@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Demo</title>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-content">
+        <ol class="list-group" id="message-list">
+        </ol>
+    </div>
+    <div class="chat-footer">
+        <textarea id="message" placeholder="请输入内容" class="form-control me-2" rows="3"></textarea>
+        <button id="send-button" class="btn btn-primary" disabled>发送</button>
+    </div>
+</div>
+
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/jquery-3.7.1.min.js"></script>
+<script>
+    $(function() {
+        const $chatContent = $(".chat-content");
+        const $messageList = $("#message-list");
+        const $message = $("#message");
+        const $sendButton = $("#send-button");
+
+        if(!window.WebSocket){
+            alert("当前浏览器不支持WebSocket，无法使用！");
+            return;
+        }
+
+        $message.on('input', function() {
+            if ($message.val().trim() === '') {
+                $sendButton.attr("disabled", true);
+            } else {
+                $sendButton.attr("disabled", false);
+            }
+        });
+
+        const websocket = new WebSocket("ws://52.196.27.202:8080/chat/websocket");
+        websocket.onmessage = function(event){
+            //console.log(event.data);
+            if (event.data === "[DONE]") {
+                $("#content").removeAttr("id");
+                $("#spinner-span").remove();
+                return;
+            }
+
+            const choices = JSON.parse(event.data).choices;
+            choices.filter(choice => choice.delta.content).forEach(choice => {
+                if (choice.delta.content.indexOf("\n") >= 0) {
+                    choice.delta.content = choice.delta.content.replace("\n", "<br>");
+                }
+                $("#content").append(choice.delta.content);
+                $chatContent.scrollTop($chatContent.prop('scrollHeight'));
+            });
+        }
+
+        $sendButton.on('click', function() {
+            const content = $message.val().trim();
+            if (content !== '') {
+                $sendButton.attr("disabled", true);
+                sendMessage(content);
+            }
+        });
+
+        function sendMessage(content) {
+            websocket.send(content);
+
+            $messageList.append(`
+                <li class="list-group-item border-0 bg-secondary" style="--bs-bg-opacity: .1;">
+                    <div class="d-flex flex-column align-items-end">
+                        <div class="fw-bold">🧐我的笔记/疑惑</div>
+                        <p>${content}</p>
+                    </div>
+                </li>
+              `);
+
+            $message.val("");
+            $chatContent.scrollTop($chatContent.prop('scrollHeight'));
+
+            $messageList.append(`
+              <li class="list-group-item border-0 mb-2 d-flex justify-content-between flex-row-reverse align-items-start bg-primary" style="--bs-bg-opacity: .2;">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">
+                    🤖
+                    <span id="spinner-span" class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="visually-hidden">🤔ing</span>
+                    </span>
+                  </div>
+                  <p id="content"></p>
+                </div>
+                <span class="badge bg-primary rounded-pill">🧠</span>
+              </li>
+            `);
+        }
+    });
+
+
+</script>
+</body>
+</html>
